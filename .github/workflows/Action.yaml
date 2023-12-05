@@ -1,0 +1,22 @@
+name: Run Main
+on:
+  workflow_dispatch:
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repo
+        uses: actions/checkout@v3
+      - name: Setting up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10.12'
+
+      - name: Installing packages
+        run: pip install geckodriver-autoinstaller selenium pyvirtualdisplay pexpect requests Pillow image
+
+      - name: Running the script
+        run: python -u sel.py
+        env:
+          API: ${{ secrets.MAIN_API }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
